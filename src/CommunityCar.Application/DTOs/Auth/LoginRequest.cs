@@ -1,0 +1,19 @@
+using System.ComponentModel.DataAnnotations;
+
+namespace CommunityCar.Application.DTOs.Auth;
+
+public class LoginRequest
+{
+    [Required]
+    [EmailAddress]
+    public string Email { get; set; } = string.Empty;
+
+    [Required]
+    [MinLength(8)]
+    public string Password { get; set; } = string.Empty;
+
+    public bool RememberMe { get; set; }
+    public string? DeviceFingerprint { get; set; }
+    public string? OtpCode { get; set; }
+    public string? BiometricToken { get; set; }
+}
