@@ -1,4 +1,8 @@
 using CommunityCar.Application.DTOs.Auth;
+using CommunityCar.Application.DTOs.Auth.Authentication;
+using CommunityCar.Application.DTOs.Auth.Password;
+using CommunityCar.Application.DTOs.Auth.Security;
+using CommunityCar.Application.DTOs.Auth.Social;
 
 namespace CommunityCar.Application.Interfaces.Auth;
 
@@ -18,6 +22,7 @@ public interface IAuthService
     Task<AuthResponse> EnableTwoFactorAsync(string userId);
     Task<AuthResponse> DisableTwoFactorAsync(string userId);
     Task<AuthResponse> VerifyTwoFactorAsync(string userId, string code);
+    Task<AuthResponse> ChangePasswordAsync(string userId, ChangePasswordRequest request);
     Task<bool> IsAccountLockedAsync(string userId);
     Task<bool> LogSecurityEventAsync(string userId, string action, string ipAddress, string userAgent);
 }

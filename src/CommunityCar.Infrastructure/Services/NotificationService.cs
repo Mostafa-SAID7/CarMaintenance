@@ -1,4 +1,4 @@
-using CommunityCar.Application.DTOs.Notifications;
+using CommunityCar.Application.DTOs.Hub.Notifications;
 using CommunityCar.Application.Interfaces.Hub;
 using CommunityCar.Domain.Entities;
 using CommunityCar.Domain.Interfaces;

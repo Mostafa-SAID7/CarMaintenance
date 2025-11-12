@@ -1,4 +1,4 @@
-using CommunityCar.Application.DTOs.Chat;
+using CommunityCar.Application.DTOs.Hub.Chat;
 using CommunityCar.Application.Features.Chat.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;

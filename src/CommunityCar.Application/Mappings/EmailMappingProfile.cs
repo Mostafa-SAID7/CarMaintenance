@@ -1,5 +1,5 @@
 using AutoMapper;
-using CommunityCar.Application.DTOs.Email;
+using CommunityCar.Application.DTOs.Auth.Email;
 
 namespace CommunityCar.Application.Mappings;
 

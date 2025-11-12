@@ -1,4 +1,5 @@
-e using CommunityCar.Application.Interfaces.Commuinty;
+using CommunityCar.Application.Interfaces.Auth;
+using CommunityCar.Application.Interfaces.Commuinty;
 using CommunityCar.Application.Interfaces.Hub;
 using CommunityCar.Domain.Interfaces;
 using CommunityCar.Infrastructure.Repositories;
@@ -15,6 +16,7 @@ public static class InfrastructureServiceCollectionExtensions
         services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
 
         // Register application services implemented in infrastructure
+        services.AddScoped<IAuthService, Services.AuthService>();
         services.AddScoped<INotificationService, Services.NotificationService>();
         services.AddScoped<IChatService, Services.ChatService>();
         services.AddScoped<IPostService, Services.PostService>();

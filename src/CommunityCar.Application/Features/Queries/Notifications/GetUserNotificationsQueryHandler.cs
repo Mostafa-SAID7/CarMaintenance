@@ -1,4 +1,4 @@
-using CommunityCar.Application.DTOs.Notifications;
+using CommunityCar.Application.DTOs.Hub.Notifications;
 using CommunityCar.Application.Interfaces.Hub;
 using MediatR;
 

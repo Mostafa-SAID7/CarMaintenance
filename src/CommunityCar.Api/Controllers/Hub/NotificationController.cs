@@ -1,4 +1,4 @@
-using CommunityCar.Application.DTOs.Notifications;
+using CommunityCar.Application.DTOs.Hub.Notifications;
 using CommunityCar.Application.Features.Notifications.Commands;
 using CommunityCar.Application.Features.Notifications.Queries;
 using MediatR;

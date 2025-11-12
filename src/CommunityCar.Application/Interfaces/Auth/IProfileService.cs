@@ -1,4 +1,4 @@
-using CommunityCar.Application.DTOs.Profile;
+using CommunityCar.Application.DTOs.Auth.Profile;
 
 namespace CommunityCar.Application.Interfaces.Auth;
 

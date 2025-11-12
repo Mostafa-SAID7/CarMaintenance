@@ -1,4 +1,4 @@
-using CommunityCar.Application.DTOs.Notifications;
+using CommunityCar.Application.DTOs.Hub.Notifications;
 
 namespace CommunityCar.Application.Interfaces.Hub;
 

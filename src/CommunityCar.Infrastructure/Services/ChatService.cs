@@ -1,4 +1,4 @@
-using CommunityCar.Application.DTOs.Chat;
+using CommunityCar.Application.DTOs.Hub.Chat;
 using CommunityCar.Application.Interfaces.Hub;
 using CommunityCar.Domain.Entities;
 using CommunityCar.Domain.Interfaces;

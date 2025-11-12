@@ -1,4 +1,4 @@
-using CommunityCar.Application.DTOs.Chat;
+using CommunityCar.Application.DTOs.Hub.Chat;
 
 namespace CommunityCar.Application.Interfaces.Hub;
 
