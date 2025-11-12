@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CommunityCar.Domain\CommunityCar.Domain.csproj" />
-    <ProjectReference Include="..\CommunityCar.Infrastructure\CommunityCar.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
