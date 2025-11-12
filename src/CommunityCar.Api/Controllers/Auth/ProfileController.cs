@@ -1,8 +1,10 @@
+using CommunityCar.Api.Resources;
 using CommunityCar.Application.DTOs.Auth.Profile;
 using CommunityCar.Application.Interfaces.Auth;
 using CommunityCar.Domain.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 
 namespace CommunityCar.Api.Controllers.Auth;
@@ -14,20 +16,18 @@ public class ProfileController : ControllerBase
 {
     private readonly IProfileService _profileService;
     private readonly ILogger<ProfileController> _logger;
+    private readonly IStringLocalizer<SharedResource> _localizer;
 
-    // Constants for error messages
-    private const string UserNotAuthenticated = "User not authenticated";
-    private const string ProfileNotFound = "Profile not found";
-    private const string InvalidProfileData = "Invalid profile data";
-    private const string NoFileUploaded = "No file uploaded";
-    private const string InvalidFileType = "Invalid file type. Only image files are allowed.";
-    private const string FileTooLarge = "File size exceeds the maximum allowed limit.";
     private const int MaxFileSize = 5 * 1024 * 1024; // 5MB
 
-    public ProfileController(IProfileService profileService, ILogger<ProfileController> logger)
+    public ProfileController(
+        IProfileService profileService,
+        ILogger<ProfileController> logger,
+        IStringLocalizer<SharedResource> localizer)
     {
         _profileService = profileService;
         _logger = logger;
+        _localizer = localizer;
     }
 
     private string? GetCurrentUserId()
@@ -46,7 +46,7 @@ public class ProfileController : ControllerBase
 
             var profile = await _profileService.GetProfileAsync(userId);
             if (profile == null)
-                return NotFound(ProfileNotFound);
+                return NotFound(_localizer["Profile.ProfileNotFound"]);
 
             return Ok(profile);
         }
@@ -118,7 +118,7 @@ public class ProfileController : ControllerBase
                 return Unauthorized(UserNotAuthenticated);
 
             if (!await _profileService.ValidateProfileDataAsync(request))
-                return BadRequest(InvalidProfileData);
+                return BadRequest(_localizer["Profile.InvalidProfileData"]);
 
             var profile = await _profileService.UpdateProfileAsync(userId, request);
             if (profile == null)
@@ -140,7 +140,7 @@ public class ProfileController : ControllerBase
         {
             var userId = GetCurrentUserId();
             if (string.IsNullOrEmpty(userId))
-                return Unauthorized(UserNotAuthenticated);
+                return Unauthorized(_localizer["Auth.UserNotAuthenticated"]);
 
             var result = await _profileService.DeleteProfileAsync(userId);
             if (!result)
@@ -161,13 +161,13 @@ public class ProfileController : ControllerBase
         try
         {
             if (file == null || file.Length == 0)
-                return BadRequest(NoFileUploaded);
+                return BadRequest(_localizer["Profile.NoFileUploaded"]);
 
             if (!IsValidImageFile(file))
-                return BadRequest(InvalidFileType);
+                return BadRequest(_localizer["Profile.InvalidFileType"]);
 
             if (file.Length > MaxFileSize)
-                return BadRequest(FileTooLarge);
+                return BadRequest(_localizer["Profile.FileTooLarge"]);
 
             var userId = GetCurrentUserId();
             if (string.IsNullOrEmpty(userId))

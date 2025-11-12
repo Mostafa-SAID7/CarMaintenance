@@ -1,4 +1,5 @@
 using CommunityCar.Application.Extensions;
+using CommunityCar.Api.Extensions;
 using CommunityCar.Api.Hubs;
 using CommunityCar.Api.Swagger;
 using CommunityCar.Infrastructure.Configurations.Auth;
@@ -56,7 +57,8 @@ builder.Services.AddAuthentication(options =>
 // Register all services using extension methods
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices();
-builder.Services.AddApiServices();
+builder.Services.AddApiServices(builder.Configuration);
+builder.Services.AddCustomApiBehaviors();
 
 // Register HttpClient for external API calls
 builder.Services.AddHttpClient();
@@ -130,52 +132,10 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(options =>
-    {
-        var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
-        foreach (var description in provider.ApiVersionDescriptions)
-        {
-            options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
-        }
-        options.RoutePrefix = string.Empty; // Serve Swagger UI at the app's root
-        options.DocumentTitle = "CommunityCar API Documentation";
-        options.DefaultModelsExpandDepth(-1); // Hide models section by default
-        options.DefaultModelRendering(Swashbuckle.AspNetCore.SwaggerUI.ModelRendering.Model);
-        options.DisplayRequestDuration();
-        options.EnableTryItOutByDefault();
-    });
-
-    // Automatically redirect root URL to Swagger UI
-    app.MapGet("/", context =>
-    {
-        context.Response.Redirect("/swagger");
-        return Task.CompletedTask;
-    });
-}
-
-app.UseHttpsRedirection();
-
-// Enable CORS
-app.UseCors("AllowReactApp");
-
-// Use custom exception handling middleware
-app.UseMiddleware<ExceptionHandlingMiddleware>();
-
-app.UseAuthentication();
-app.UseAuthorization();
-
-// Enable static file serving for uploaded images
-app.UseStaticFiles();
-
-app.MapControllers();
-
-// Map SignalR hubs
-app.MapHub<NotificationHub>("/notificationHub");
-app.MapHub<ChatHub>("/chatHub");
-app.MapHub<ForumHub>("/forumHub");
+// Configure the HTTP request pipeline
+app.UseEnvironmentConfiguration(app.Environment);
+app.UseCustomMiddleware(app.Environment);
+app.UseCustomSwagger(app.Environment);
+app.UseCustomEndpoints();
 
 app.Run();

@@ -1,3 +1,4 @@
+using CommunityCar.Application.DTOs.Community;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -87,63 +88,4 @@ public class BadgesController : ControllerBase
         // return CreatedAtAction(nameof(GetMyBadges), new { id = userBadgeId }, userBadgeId);
         return NotImplemented();
     }
-}
-
-public class BadgeDto
-{
-    public int Id { get; set; }
-    public string Name { get; set; } = string.Empty;
-    public string Description { get; set; } = string.Empty;
-    public string IconUrl { get; set; } = string.Empty;
-    public Domain.Entities.Community.BadgeType Type { get; set; }
-    public Domain.Entities.Community.BadgeRarity Rarity { get; set; }
-    public int PointsValue { get; set; }
-    public string? Criteria { get; set; }
-    public bool IsActive { get; set; }
-    public int AwardedCount { get; set; }
-}
-
-public class UserBadgeDto
-{
-    public int Id { get; set; }
-    public int BadgeId { get; set; }
-    public BadgeDto Badge { get; set; } = null!;
-    public string AwardedById { get; set; } = string.Empty;
-    public string AwardedByName { get; set; } = string.Empty;
-    public string? Reason { get; set; }
-    public DateTime AwardedAt { get; set; }
-    public bool IsDisplayed { get; set; }
-}
-
-public class ReputationScoreDto
-{
-    public string UserId { get; set; } = string.Empty;
-    public string UserName { get; set; } = string.Empty;
-    public int TotalScore { get; set; }
-    public int PostsScore { get; set; }
-    public int CommentsScore { get; set; }
-    public int VotesReceivedScore { get; set; }
-    public int ModerationScore { get; set; }
-    public int BadgesScore { get; set; }
-    public Domain.Entities.Community.ReputationLevel Level { get; set; }
-    public int NextLevelThreshold { get; set; }
-    public int BadgeCount { get; set; }
-    public DateTime LastUpdated { get; set; }
-}
-
-public class ReputationLeaderboardDto
-{
-    public int Rank { get; set; }
-    public string UserId { get; set; } = string.Empty;
-    public string UserName { get; set; } = string.Empty;
-    public int TotalScore { get; set; }
-    public Domain.Entities.Community.ReputationLevel Level { get; set; }
-    public int BadgeCount { get; set; }
-}
-
-public class AwardBadgeRequest
-{
-    public int BadgeId { get; set; }
-    public string UserId { get; set; } = string.Empty;
-    public string Reason { get; set; } = string.Empty;
 }

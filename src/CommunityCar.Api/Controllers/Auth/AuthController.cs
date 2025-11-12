@@ -1,3 +1,5 @@
+using CommunityCar.Api.Filters;
+using CommunityCar.Api.Resources;
 using CommunityCar.Application.DTOs.Auth;
 using CommunityCar.Application.DTOs.Auth.Account;
 using CommunityCar.Application.DTOs.Auth.Authentication;
@@ -5,28 +7,38 @@ using CommunityCar.Application.DTOs.Auth.Password;
 using CommunityCar.Application.DTOs.Auth.Response;
 using CommunityCar.Application.DTOs.Auth.Security;
 using CommunityCar.Application.DTOs.Auth.Social;
+using CommunityCar.Application.Helpers;
 using CommunityCar.Application.Interfaces.Auth;
 using CommunityCar.Domain.Entities.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 
 namespace CommunityCar.Api.Controllers.Auth;
 
 [ApiController]
 [Route("api/[controller]")]
+[ServiceFilter(typeof(AuthValidationFilter))]
+[ServiceFilter(typeof(AuthLoggingFilter))]
 public class AuthController : ControllerBase
 {
     private readonly IAuthService _authService;
     private readonly UserManager<User> _userManager;
     private readonly ILogger<AuthController> _logger;
+    private readonly IStringLocalizer<SharedResource> _localizer;
 
-    public AuthController(IAuthService authService, UserManager<User> userManager, ILogger<AuthController> logger)
+    public AuthController(
+        IAuthService authService,
+        UserManager<User> userManager,
+        ILogger<AuthController> logger,
+        IStringLocalizer<SharedResource> localizer)
     {
         _authService = authService;
         _userManager = userManager;
         _logger = logger;
+        _localizer = localizer;
     }
 
     [HttpGet("status")]
@@ -83,7 +95,7 @@ public class AuthController : ControllerBase
     {
         try
         {
-            var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            var userId = AuthHelper.GetCurrentUserId(User);
             if (string.IsNullOrEmpty(userId))
             {
                 _logger.LogWarning("Unauthorized access attempt to GetCurrentUser");
@@ -97,7 +109,7 @@ public class AuthController : ControllerBase
                 return NotFound();
             }
 
-            var roles = await _userManager.GetRolesAsync(user);
+            var roles = AuthHelper.GetCurrentUserRoles(User);
 
             var response = new CurrentUserResponse
             {

@@ -1,6 +1,6 @@
 namespace CommunityCar.Domain.Exceptions;
 
-public class NotFoundException : Exception
+public class NotFoundException : DomainException
 {
     public NotFoundException(string message) : base(message)
     {

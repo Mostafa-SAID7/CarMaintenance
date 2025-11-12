@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace CommunityCar.Domain.Exceptions;
 
-public class ValidationException : Exception
+public class ValidationException : DomainException
 {
     public IEnumerable<string> Errors { get; }
 

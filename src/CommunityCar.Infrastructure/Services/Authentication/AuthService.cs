@@ -10,7 +10,7 @@ using CommunityCar.Domain.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
-namespace CommunityCar.Infrastructure.Services;
+namespace CommunityCar.Infrastructure.Services.Authentication;
 
 public class AuthService : IAuthService
 {

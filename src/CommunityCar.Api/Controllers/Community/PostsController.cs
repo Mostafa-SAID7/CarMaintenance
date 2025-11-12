@@ -1,9 +1,12 @@
+using CommunityCar.Api.Resources;
 using CommunityCar.Application.DTOs.Community;
 using CommunityCar.Application.Features.Posts.Commands;
 using CommunityCar.Application.Features.Posts.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Logging;
 
 namespace CommunityCar.Api.Controllers.Community;
 
@@ -13,10 +16,17 @@ namespace CommunityCar.Api.Controllers.Community;
 public class PostsController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly ILogger<PostsController> _logger;
+    private readonly IStringLocalizer<SharedResource> _localizer;
 
-    public PostsController(IMediator mediator)
+    public PostsController(
+        IMediator mediator,
+        ILogger<PostsController> logger,
+        IStringLocalizer<SharedResource> localizer)
     {
         _mediator = mediator;
+        _logger = logger;
+        _localizer = localizer;
     }
 
     [HttpPost]
@@ -52,7 +62,7 @@ public class PostsController : ControllerBase
 
         var post = await _mediator.Send(query);
         if (post == null)
-            return NotFound();
+            return NotFound(_localizer["Community.PostNotFound"]);
 
         return Ok(post);
     }
@@ -113,11 +123,6 @@ public class PostsController : ControllerBase
         };
 
         var result = await _mediator.Send(command);
-        return result ? Ok() : BadRequest();
+        return result ? Ok(_localizer["Community.VoteRecorded"]) : BadRequest(_localizer["Community.AlreadyVoted"]);
     }
-}
-
-public class VotePostRequest
-{
-    public Domain.Entities.Community.VoteType VoteType { get; set; }
 }

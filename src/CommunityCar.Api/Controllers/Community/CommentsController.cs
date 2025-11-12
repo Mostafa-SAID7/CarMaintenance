@@ -144,8 +144,3 @@ public class CommentsController : ControllerBase
         return NotImplemented();
     }
 }
-
-public class VoteCommentRequest
-{
-    public Domain.Entities.Community.VoteType VoteType { get; set; }
-}

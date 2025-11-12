@@ -43,6 +43,15 @@ public static class ServiceCollectionExtensions
         // services.AddScoped<ICurrentUserService, CurrentUserService>(); // Commented out - service not implemented
         // services.AddScoped<IApiResponseService, ApiResponseService>(); // Commented out - service not implemented
 
+        // Register filters
+        services.AddScoped<global::CommunityCar.Api.Filters.AuthValidationFilter>();
+        services.AddScoped<global::CommunityCar.Api.Filters.AuthLoggingFilter>();
+
+        // Register validators
+        services.AddValidatorsFromAssemblyContaining<global::CommunityCar.Application.Validators.Auth.LoginRequestValidator>();
+        services.AddValidatorsFromAssemblyContaining<global::CommunityCar.Application.Validators.Auth.RegisterRequestValidator>();
+        services.AddValidatorsFromAssemblyContaining<global::CommunityCar.Application.Validators.Auth.ChangePasswordRequestValidator>();
+
         // Register background services
         // services.AddHostedService<EmailBackgroundService>(); // Commented out - service not implemented
         // services.AddHostedService<AuditCleanupService>(); // Commented out - service not implemented
