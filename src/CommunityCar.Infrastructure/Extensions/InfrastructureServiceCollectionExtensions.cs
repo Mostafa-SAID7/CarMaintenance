@@ -1,4 +1,6 @@
-e using CommunityCar.Domain.Interfaces;
+e using CommunityCar.Application.Interfaces.Commuinty;
+using CommunityCar.Application.Interfaces.Hub;
+using CommunityCar.Domain.Interfaces;
 using CommunityCar.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,10 +15,10 @@ public static class InfrastructureServiceCollectionExtensions
         services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
 
         // Register application services implemented in infrastructure
-        services.AddScoped<CommunityCar.Application.Interfaces.INotificationService, Services.NotificationService>();
-        services.AddScoped<CommunityCar.Application.Interfaces.IChatService, Services.ChatService>();
-        services.AddScoped<CommunityCar.Application.Interfaces.IPostService, Services.PostService>();
-        services.AddScoped<CommunityCar.Application.Interfaces.ICommentService, Services.CommentService>();
+        services.AddScoped<INotificationService, Services.NotificationService>();
+        services.AddScoped<IChatService, Services.ChatService>();
+        services.AddScoped<IPostService, Services.PostService>();
+        services.AddScoped<ICommentService, Services.CommentService>();
 
         // Register specific repositories if needed
         // services.AddScoped<ICarRepository, CarRepository>(); // Commented out - repository not implemented

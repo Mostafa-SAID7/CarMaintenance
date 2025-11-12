@@ -1,5 +1,5 @@
 using CommunityCar.Application.DTOs.Community;
-using CommunityCar.Application.Interfaces;
+using CommunityCar.Application.Interfaces.Commuinty;
 using CommunityCar.Domain.Entities;
 using CommunityCar.Domain.Entities.Community;
 using CommunityCar.Domain.Interfaces;
