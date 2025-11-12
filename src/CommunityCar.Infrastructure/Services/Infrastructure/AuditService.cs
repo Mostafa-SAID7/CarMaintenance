@@ -2,7 +2,7 @@ using CommunityCar.Application.Interfaces;
 using Microsoft.Extensions.Logging;
 using System.Collections.Concurrent;
 
-namespace CommunityCar.Infrastructure.Services;
+namespace CommunityCar.Infrastructure.Services.Infrastructure;
 
 public class AuditService : IAuditService
 {
@@ -410,3 +410,4 @@ public class AuditRetentionPolicy
     public bool CompressArchives { get; set; }
     public bool EncryptionEnabled { get; set; }
 }
+

@@ -1,4 +1,4 @@
-using CommunityCar.Domain.Entities.Community;
+using CommunityCar.Domain.Enums;
 
 namespace CommunityCar.Application.DTOs.Community;
 

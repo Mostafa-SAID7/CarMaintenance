@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
 
-namespace CommunityCar.Infrastructure.Services;
+namespace CommunityCar.Infrastructure.Services.Infrastructure;
 
 public class ViewRenderService : IViewRenderService
 {
@@ -282,3 +282,4 @@ public class RenderedViewResult
     public bool HasScripts { get; set; }
     public string? Error { get; set; }
 }
+

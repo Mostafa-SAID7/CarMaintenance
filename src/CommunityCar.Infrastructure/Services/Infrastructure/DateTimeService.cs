@@ -1,6 +1,6 @@
 using CommunityCar.Application.Interfaces;
 
-namespace CommunityCar.Infrastructure.Services;
+namespace CommunityCar.Infrastructure.Services.Infrastructure;
 
 public class DateTimeService : IDateTimeService
 {
@@ -225,3 +225,4 @@ public class DateTimeService : IDateTimeService
         return !IsWeekend(date);
     }
 }
+

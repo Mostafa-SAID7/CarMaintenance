@@ -34,6 +34,7 @@ public class RecentVisitorsSpecification<T> : Specification<T> where T : class
     public RecentVisitorsSpecification(Expression<Func<T, bool>> criteria)
     {
         AddCriteria(criteria);
-        AddOrderByDescending(x => (DateTime)((dynamic)x).LastLoginAt ?? DateTime.MinValue);
+        // Note: Ordering by dynamic property not supported in expression trees
+        // AddOrderByDescending(x => ((DateTime?)((dynamic)x).LastLoginAt) ?? DateTime.MinValue);
     }
 }

@@ -48,6 +48,7 @@ public class UserNotificationsSpecification<T> : Specification<T> where T : clas
     public UserNotificationsSpecification(Expression<Func<T, bool>> criteria)
     {
         AddCriteria(criteria);
-        AddOrderByDescending(x => (DateTime)((dynamic)x).CreatedAt);
+        // Note: Ordering by dynamic property not supported in expression trees
+        // AddOrderByDescending(x => (DateTime)((dynamic)x).CreatedAt);
     }
 }

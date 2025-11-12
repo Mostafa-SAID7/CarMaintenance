@@ -3,7 +3,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using System.Collections.Concurrent;
 
-namespace CommunityCar.Infrastructure.Services;
+namespace CommunityCar.Infrastructure.Services.Caching;
 
 public class CacheService : ICacheService
 {

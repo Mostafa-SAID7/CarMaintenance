@@ -4,7 +4,7 @@ using CommunityCar.Domain.Entities;
 using CommunityCar.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace CommunityCar.Infrastructure.Services;
+namespace CommunityCar.Infrastructure.Services.Communication;
 
 public class ChatService : IChatService
 {
@@ -114,3 +114,4 @@ public class ChatService : IChatService
             .CountAsync(m => m.ReceiverId == userId && !m.IsRead && !m.IsDeleted);
     }
 }
+

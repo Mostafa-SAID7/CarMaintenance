@@ -1,5 +1,5 @@
 using CommunityCar.Application.DTOs.Community;
-using CommunityCar.Application.Interfaces.Commuinty;
+using CommunityCar.Application.Interfaces.Community;
 using MediatR;
 
 namespace CommunityCar.Application.Features.Comments.Commands;

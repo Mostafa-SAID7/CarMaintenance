@@ -1,11 +1,12 @@
 using CommunityCar.Application.DTOs.Community;
-using CommunityCar.Application.Interfaces.Commuinty;
+using CommunityCar.Application.Interfaces.Community;
 using CommunityCar.Domain.Entities;
 using CommunityCar.Domain.Entities.Community;
 using CommunityCar.Domain.Interfaces;
+using CommunityCar.Infrastructure.Utilities;
 using Microsoft.EntityFrameworkCore;
 
-namespace CommunityCar.Infrastructure.Services;
+namespace CommunityCar.Infrastructure.Services.Content;
 
 public class PostService : IPostService
 {
@@ -25,9 +26,7 @@ public class PostService : IPostService
     public async Task<int> CreatePostAsync(CreatePostRequest request, string authorId)
     {
         // Validate forum exists and is active
-        var forum = await _forumRepository.GetByIdAsync(request.ForumId);
-        if (forum == null || !forum.IsActive)
-            throw new ArgumentException("Invalid or inactive forum");
+        await ValidationHelper.ValidateForumExistsAndActiveAsync(_forumRepository, request.ForumId);
 
         var post = new Post
         {
@@ -292,3 +291,4 @@ public class PostService : IPostService
         return true;
     }
 }
+

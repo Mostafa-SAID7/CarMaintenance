@@ -3,7 +3,7 @@ using CommunityCar.Domain.Entities.Community;
 using Microsoft.Extensions.Logging;
 using System.Xml.Linq;
 
-namespace CommunityCar.Infrastructure.Services;
+namespace CommunityCar.Infrastructure.Services.Infrastructure;
 
 public class SitemapService : ISitemapService
 {
@@ -249,3 +249,4 @@ public class SitemapStats
     public DateTime LastGenerated { get; set; }
     public long EstimatedSize { get; set; } // in bytes
 }
+

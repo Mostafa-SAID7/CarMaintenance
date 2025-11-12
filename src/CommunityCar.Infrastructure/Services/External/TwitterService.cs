@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 
-namespace CommunityCar.Infrastructure.Services;
+namespace CommunityCar.Infrastructure.Services.External;
 
 public class TwitterService : ITwitterService
 {
@@ -516,3 +516,4 @@ public class TwitterAttachments
 {
     public List<string> MediaKeys { get; set; } = new();
 }
+

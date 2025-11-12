@@ -1,11 +1,12 @@
 using CommunityCar.Application.DTOs.Community;
-using CommunityCar.Application.Interfaces.Commuinty;
+using CommunityCar.Application.Interfaces.Community;
 using CommunityCar.Domain.Entities;
 using CommunityCar.Domain.Entities.Community;
 using CommunityCar.Domain.Interfaces;
+using CommunityCar.Infrastructure.Utilities;
 using Microsoft.EntityFrameworkCore;
 
-namespace CommunityCar.Infrastructure.Services;
+namespace CommunityCar.Infrastructure.Services.Content;
 
 public class CommentService : ICommentService
 {
@@ -25,9 +26,7 @@ public class CommentService : ICommentService
     public async Task<int> CreateCommentAsync(CreateCommentRequest request, string authorId)
     {
         // Validate post exists and is not locked
-        var post = await _postRepository.GetByIdAsync(request.PostId);
-        if (post == null || post.IsDeleted || post.IsLocked)
-            throw new ArgumentException("Invalid or locked post");
+        var post = await ValidationHelper.ValidatePostExistsAndNotLockedAsync(_postRepository, request.PostId);
 
         var comment = new Comment
         {
@@ -244,3 +243,4 @@ public class CommentService : ICommentService
         return true;
     }
 }
+

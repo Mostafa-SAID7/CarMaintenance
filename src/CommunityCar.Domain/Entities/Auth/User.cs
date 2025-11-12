@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Identity;
-using CommunityCar.Domain.Entities.Car;
-using CommunityCar.Domain.Entities.Booking;
 
 namespace CommunityCar.Domain.Entities.Auth;
 
@@ -47,6 +45,7 @@ public class User : IdentityUser<string>
     public string? CoverPhotoUrl { get; set; }
 
     // Navigation properties
+    public virtual CommunityCar.Domain.Entities.Profile.UserProfile? UserProfile { get; set; }
     public virtual ICollection<CommunityCar.Domain.Entities.Car.Car> Cars { get; set; } = new List<CommunityCar.Domain.Entities.Car.Car>();
     public virtual ICollection<CommunityCar.Domain.Entities.Booking.Booking> Bookings { get; set; } = new List<CommunityCar.Domain.Entities.Booking.Booking>();
 }

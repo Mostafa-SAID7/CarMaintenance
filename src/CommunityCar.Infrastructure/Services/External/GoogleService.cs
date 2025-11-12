@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using System.Net.Http.Headers;
 using System.Text.Json;
 
-namespace CommunityCar.Infrastructure.Services;
+namespace CommunityCar.Infrastructure.Services.External;
 
 public class GoogleService : IGoogleService
 {
@@ -505,3 +505,4 @@ public class GoogleYouTubeThumbnailInfo
     public int Width { get; set; }
     public int Height { get; set; }
 }
+

@@ -4,7 +4,7 @@ using CommunityCar.Domain.Entities;
 using CommunityCar.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace CommunityCar.Infrastructure.Services;
+namespace CommunityCar.Infrastructure.Services.Communication;
 
 public class NotificationService : INotificationService
 {
@@ -99,3 +99,4 @@ public class NotificationService : INotificationService
         await _unitOfWork.SaveChangesAsync();
     }
 }
+

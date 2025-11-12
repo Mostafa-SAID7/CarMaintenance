@@ -1,4 +1,5 @@
 using CommunityCar.Application.DTOs.Community;
+using CommunityCar.Application.Features.Badges.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,11 +22,9 @@ public class BadgesController : ControllerBase
     [ProducesResponseType(typeof(IEnumerable<BadgeDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetBadges()
     {
-        // TODO: Implement GetBadgesQuery
-        // var query = new GetBadgesQuery();
-        // var badges = await _mediator.Send(query);
-        // return Ok(badges);
-        return NotImplemented();
+        var query = new GetBadgesQuery();
+        var badges = await _mediator.Send(query);
+        return Ok(badges);
     }
 
     [HttpGet("my-badges")]

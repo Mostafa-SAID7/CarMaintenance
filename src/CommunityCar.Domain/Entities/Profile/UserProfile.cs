@@ -54,6 +54,9 @@ public class UserProfile
     [StringLength(500)]
     public string? CoverPhotoUrl { get; set; }
 
+    [StringLength(1000)]
+    public string? SocialLinks { get; set; }
+
     public bool IsPublic { get; set; } = true;
 
     public bool ShowEmail { get; set; } = false;

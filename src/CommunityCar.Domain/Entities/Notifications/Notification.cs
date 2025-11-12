@@ -1,8 +1,9 @@
 using CommunityCar.Domain.Common;
+using CommunityCar.Domain.Entities.Auth;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CommunityCar.Domain.Entities;
+namespace CommunityCar.Domain.Entities.Notifications;
 
 public class Notification : BaseEntity
 {

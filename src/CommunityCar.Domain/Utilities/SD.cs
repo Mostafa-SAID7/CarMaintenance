@@ -90,6 +90,12 @@ public static class SD
     public const int PasswordResetTokenExpiryHours = 24;
     public const int EmailVerificationTokenExpiryHours = 48;
 
+    // Password Policy
+    public const int PasswordRequiredLength = 8;
+
+    // Configuration Sections
+    public const string AnalyticsSection = "Analytics";
+
     // Pagination
     public const int DefaultPageSize = 10;
     public const int MaxPageSize = 100;

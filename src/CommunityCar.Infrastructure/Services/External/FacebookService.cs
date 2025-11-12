@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using System.Net.Http.Headers;
 using System.Text.Json;
 
-namespace CommunityCar.Infrastructure.Services;
+namespace CommunityCar.Infrastructure.Services.External;
 
 public class FacebookService : IFacebookService
 {
@@ -388,3 +388,4 @@ public class FacebookEventCreateRequest
     public DateTime EndTime { get; set; }
     public string Location { get; set; } = string.Empty;
 }
+

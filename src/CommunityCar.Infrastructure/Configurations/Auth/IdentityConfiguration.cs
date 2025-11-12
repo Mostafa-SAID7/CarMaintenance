@@ -1,4 +1,5 @@
 using CommunityCar.Domain.Entities.Auth;
+using CommunityCar.Domain.Utilities;
 using CommunityCar.Infrastructure.Configurations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -15,14 +16,14 @@ public static class IdentityConfiguration
         {
             // Password settings
             options.Password.RequireDigit = true;
-            options.Password.RequiredLength = 8;
+            options.Password.RequiredLength = SD.PasswordRequiredLength;
             options.Password.RequireNonAlphanumeric = true;
             options.Password.RequireUppercase = true;
             options.Password.RequireLowercase = true;
 
             // Lockout settings
-            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-            options.Lockout.MaxFailedAccessAttempts = 5;
+            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(SD.LockoutDurationMinutes);
+            options.Lockout.MaxFailedAccessAttempts = SD.MaxLoginAttempts;
             options.Lockout.AllowedForNewUsers = true;
 
             // User settings
@@ -42,7 +43,7 @@ public static class IdentityConfiguration
     public static IServiceCollection AddDatabaseConfiguration(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(configuration.GetConnectionString(SD.DefaultConnection)));
 
         return services;
     }
