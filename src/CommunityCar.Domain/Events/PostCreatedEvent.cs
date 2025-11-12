@@ -1,9 +1,8 @@
 using CommunityCar.Domain.Common;
-using MediatR;
 
 namespace CommunityCar.Domain.Events;
 
-public class PostCreatedEvent : INotification
+public class PostCreatedEvent
 {
     public int PostId { get; }
     public string AuthorId { get; }

@@ -28,6 +28,11 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : Base
         return await _dbSet.ToListAsync();
     }
 
+    public virtual IEnumerable<TEntity> GetAll()
+    {
+        return _dbSet.ToList();
+    }
+
     public virtual async Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate)
     {
         return await _dbSet.Where(predicate).ToListAsync();
@@ -76,6 +81,12 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : Base
         entity.UpdateTimestamp();
         _context.Entry(entity).State = EntityState.Modified;
         await Task.CompletedTask;
+    }
+
+    public virtual void Update(TEntity entity)
+    {
+        entity.UpdateTimestamp();
+        _context.Entry(entity).State = EntityState.Modified;
     }
 
     public virtual async Task UpdateRangeAsync(IEnumerable<TEntity> entities)
@@ -154,6 +165,11 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : Base
     {
         _dbSet.Remove(entity);
         await Task.CompletedTask;
+    }
+
+    public virtual void Delete(TEntity entity)
+    {
+        _dbSet.Remove(entity);
     }
 
     public virtual async Task HardDeleteRangeAsync(IEnumerable<TEntity> entities)

@@ -17,7 +17,6 @@ global using CommunityCar.Application.DTOs;
 global using CommunityCar.Application.DTOs.Auth;
 global using CommunityCar.Application.DTOs.Profile;
 global using CommunityCar.Application.Interfaces;
-global using CommunityCar.Application.Services;
 global using CommunityCar.Domain.Entities;
 global using CommunityCar.Domain.Entities.Auth;
 global using CommunityCar.Domain.Entities.Profile;

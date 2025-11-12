@@ -8,6 +8,7 @@ public interface IRepository<TEntity> where TEntity : BaseEntity
     // Basic CRUD operations
     Task<TEntity?> GetByIdAsync(int id);
     Task<IEnumerable<TEntity>> GetAllAsync();
+    IEnumerable<TEntity> GetAll();
     Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate);
     Task<TEntity?> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
     Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate);
@@ -19,7 +20,11 @@ public interface IRepository<TEntity> where TEntity : BaseEntity
 
     // Update operations
     Task UpdateAsync(TEntity entity);
+    void Update(TEntity entity);
     Task UpdateRangeAsync(IEnumerable<TEntity> entities);
+
+    // Delete operations
+    void Delete(TEntity entity);
 
     // Soft delete operations
     Task SoftDeleteAsync(int id, string? deletedBy = null);
